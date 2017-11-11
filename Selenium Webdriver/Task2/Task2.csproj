@@ -51,6 +51,7 @@
     <Compile Include="HomePage.cs" />
     <Compile Include="LoginPage .cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TopicPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
