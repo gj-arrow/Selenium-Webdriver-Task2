@@ -1,0 +1,14 @@
+D:\Student\Tasks\A1QA\task2\Selenium Webdriver\Task2\obj\Debug\Task2.csprojResolveAssemblyReference.cache
+D:\Student\Tasks\A1QA\task2\Selenium Webdriver\Task2\bin\Debug\NUnit3.TestAdapter.dll
+D:\Student\Tasks\A1QA\task2\Selenium Webdriver\Task2\bin\Debug\nunit.engine.dll
+D:\Student\Tasks\A1QA\task2\Selenium Webdriver\Task2\bin\Debug\nunit.engine.api.dll
+D:\Student\Tasks\A1QA\task2\Selenium Webdriver\Task2\bin\Debug\Mono.Cecil.dll
+D:\Student\Tasks\A1QA\task2\Selenium Webdriver\Task2\bin\Debug\Mono.Cecil.Pdb.dll
+D:\Student\Tasks\A1QA\task2\Selenium Webdriver\Task2\bin\Debug\Mono.Cecil.Mdb.dll
+D:\Student\Tasks\A1QA\task2\Selenium Webdriver\Task2\bin\Debug\Mono.Cecil.Rocks.dll
+D:\Student\Tasks\A1QA\task2\Selenium Webdriver\Task2\bin\Debug\Task2.dll
+D:\Student\Tasks\A1QA\task2\Selenium Webdriver\Task2\bin\Debug\Task2.pdb
+D:\Student\Tasks\A1QA\task2\Selenium Webdriver\Task2\bin\Debug\WebDriver.dll
+D:\Student\Tasks\A1QA\task2\Selenium Webdriver\Task2\bin\Debug\WebDriver.xml
+D:\Student\Tasks\A1QA\task2\Selenium Webdriver\Task2\obj\Debug\Task2.dll
+D:\Student\Tasks\A1QA\task2\Selenium Webdriver\Task2\obj\Debug\Task2.pdb
