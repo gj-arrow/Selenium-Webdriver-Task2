@@ -12,9 +12,11 @@ namespace Task2
     {
         private By usernameLocator = By.CssSelector("#auth-container__forms > div > div.auth-box__field > form > div:nth-child(1) > div:nth-child(1) > input");
         private By passwordLocator = By.CssSelector("#auth-container__forms > div > div.auth-box__field > form > div:nth-child(1) > div:nth-child(2) > input");
+        private By submitLocator = By.CssSelector("#auth-container__forms > div > div.auth-box__field > form > div:nth-child(3) > div > button");
         private IWebDriver driver;
         private IWebElement inputUserName;
         private IWebElement inputPassword;
+        private IWebElement buttonSubmit;
 
         public LoginPage(IWebDriver driver)
         {
@@ -43,7 +45,11 @@ namespace Task2
 
         public HomePage SubmitLogin()
         {
-            inputPassword.Submit();
+            buttonSubmit = driver.FindElement(submitLocator);
+            if (buttonSubmit.Enabled)
+            {
+                buttonSubmit.Submit();
+            }
             return new HomePage(driver);
         }
     }

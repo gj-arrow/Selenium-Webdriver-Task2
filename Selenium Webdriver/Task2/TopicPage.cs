@@ -18,7 +18,7 @@ namespace Task2
 
         public string GetNameOfTopic()
         {
-            return driver.FindElement(By.XPath("//*[@id='container']/div/div[2]/div/div/div[2]/div[2]/div[2]/h1")).Text;
+            return driver.FindElement(By.CssSelector("#container > div > div.l-gradient-wrapper > div > div > div.catalog-content.js-scrolling-area > div.schema-grid__wrapper > div.schema-header > h1")).Text;
         }
     }
 }

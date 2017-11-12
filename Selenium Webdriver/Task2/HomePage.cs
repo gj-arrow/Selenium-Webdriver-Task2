@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 
 namespace Task2
 {
@@ -46,9 +48,37 @@ namespace Task2
         public IWebElement GetRandomTopic()
         {
             var numberTopic = random.Next(0, listTopics.Count);
-            var selectedTopic = listTopics.ToArray()[numberTopic].FindElement(By.TagName("a"));
-            return selectedTopic;
+           // var selectedTopic = listTopics.ToArray()[numberTopic].FindElement(By.TagName("a"));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            Func<IWebDriver, IWebElement> waitForElement = new Func<IWebDriver, IWebElement>((IWebDriver Web) =>
+            {
+                IWebElement qwe = listTopics.ToArray()[numberTopic].FindElement(By.TagName("a"));
+                return qwe;
+            });
+            IWebElement ewq = wait.Until(waitForElement);
+            return ewq;
         }
+
+        //public string GetRandomTopic2()
+        //{
+        //    var numberTopic = random.Next(0, listTopics.Count);
+        //    var selectedTopic = listTopics.ToArray()[numberTopic].FindElement(By.TagName("a"));
+        //    if (string.IsNullOrEmpty(selectedTopic.Text))
+        //    {
+        //        int i = 12;
+        //    }
+        //    return selectedTopic.Text;
+        //}
+        //public TopicPage GoToRandomTopic2(string topic)
+        //{
+        //    IWebElement s = driver.FindElement(By.XPath(
+        //        "//*[@id='container']/div/div[2]/div/div/div[1]/div/div[1]/ul/li/a/span/span[contains (text(),'" +
+        //        topic + "')]"));
+        //    IWebElement parent = s.FindElement(By.XPath(".."));
+        //    IWebElement p = parent.FindElement(By.XPath(".."));
+        //    driver.Navigate().GoToUrl(p.GetAttribute("href"));
+        //    return new TopicPage(driver);
+        //}
 
         public TopicPage GoToRandomTopic(IWebElement topic)
         {  
@@ -75,14 +105,18 @@ namespace Task2
 
         public void Logout()
         {
-            profileMenu = driver.FindElement(By.XPath("//*[@id='userbar']/div[1]/div[1]/a"));
+            Actions actions = new Actions(driver);
+            profileMenu = driver.FindElement(By.XPath(@"//*[@id=""userbar""]/div[1]/div[1]/a"));
             if (profileMenu.Enabled)
             {
-                profileMenu.Click();
+                actions.MoveToElement(profileMenu).Click().Build().Perform();
+               // profileMenu.Click();
             }
-            buttonLogOut = driver.FindElement(By.XPath("//*[@id='userbar']/div[1]/div[1]/div/div[1]/div[1]/div[2]/div/a"));
+           // actions = new Actions(driver);
+            buttonLogOut = driver.FindElement(By.XPath(@"//*[@id=""userbar""]/div[1]/div[1]/div/div[1]/div[1]/div[2]/div/a"));
             if (buttonLogOut.Enabled)
             {
+            //    actions.MoveToElement(buttonLogOut).Click().Build().Perform();
                 buttonLogOut.Click();
             }
         }
