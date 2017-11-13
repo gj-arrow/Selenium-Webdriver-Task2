@@ -26,3 +26,5 @@ D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Selenium We
 D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Selenium Webdriver\Task2\obj\Debug\Task2.csprojResolveAssemblyReference.cache
 D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Selenium Webdriver\Task2\obj\Debug\Task2.dll
 D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Selenium Webdriver\Task2\obj\Debug\Task2.pdb
+D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Selenium Webdriver\Task2\bin\Debug\WebDriver.Support.dll
+D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Selenium Webdriver\Task2\bin\Debug\WebDriver.Support.xml

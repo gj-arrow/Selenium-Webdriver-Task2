@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 
 namespace Task2
 {
@@ -25,32 +27,34 @@ namespace Task2
 
         public LoginPage EnterUsername(string username)
         {
-            inputUserName = driver.FindElement(usernameLocator);
-            if (inputUserName.Enabled)
-            {
-                inputUserName.SendKeys(username);
-            }
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+            inputUserName = wait.Until(ExpectedConditions.ElementIsVisible(usernameLocator));
+            //Func<IWebDriver, IWebElement> waitForElement = ((web) =>
+            //{
+            //    IWebElement qwe = driver.FindElement(usernameLocator);
+            //    return qwe;
+            //});
+            //inputUserName = wait.Until(waitForElement);
+            inputUserName.SendKeys(username);
             return this;
         }
 
         public LoginPage EnterPassword(string password)
         {
-            inputPassword = driver.FindElement(passwordLocator);
-            if (inputPassword.Enabled)
-            {
-                inputPassword.SendKeys(password);
-            }
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+            inputPassword = wait.Until(ExpectedConditions.ElementIsVisible(passwordLocator));
+           // inputPassword = driver.FindElement(passwordLocator);
+            inputPassword.SendKeys(password);
             return this;
         }
 
-        public HomePage SubmitLogin()
+        public void SubmitLogin()
         {
-            buttonSubmit = driver.FindElement(submitLocator);
-            if (buttonSubmit.Enabled)
-            {
-                buttonSubmit.Submit();
-            }
-            return new HomePage(driver);
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+            buttonSubmit = wait.Until(ExpectedConditions.ElementToBeClickable(submitLocator));
+            Actions actions = new Actions(driver);
+            actions.MoveToElement(buttonSubmit).Click().Build().Perform();
+            //buttonSubmit.Click();
         }
     }
 }

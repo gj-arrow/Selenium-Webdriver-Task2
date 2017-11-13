@@ -26,67 +26,48 @@ namespace Task2
             this.driver = driver;
         }
 
-        public void GoHomePage()
+        public HomePage NavigateHomePage()
         {
             driver.Navigate().GoToUrl("https://www.onliner.by/");
+            return this;
         }
 
-        public void ClickAuth()
+        public HomePage ClickAuth()
         {
-            buttonAuth = driver.FindElement(By.XPath("//*[@id='userbar']/div/div[1]"));
-            if (buttonAuth.Enabled)
-            {
-                buttonAuth.Click();
-            }
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+            buttonAuth = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id='userbar']/div/div[1]")));
+            buttonAuth.Click();
+            return this;
         }
 
-        public void GetListTopcis()
+        public HomePage GetListTopcis()
         {
             listTopics = driver.FindElements(By.XPath("//*[@id='container']/div/div[2]/div/div/div[1]/div/div[1]/ul/li"));
+            return this;
         }
 
         public IWebElement GetRandomTopic()
         {
             var numberTopic = random.Next(0, listTopics.Count);
-           // var selectedTopic = listTopics.ToArray()[numberTopic].FindElement(By.TagName("a"));
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            Func<IWebDriver, IWebElement> waitForElement = new Func<IWebDriver, IWebElement>((IWebDriver Web) =>
-            {
-                IWebElement qwe = listTopics.ToArray()[numberTopic].FindElement(By.TagName("a"));
-                return qwe;
-            });
-            IWebElement ewq = wait.Until(waitForElement);
-            return ewq;
+            var randomTopic = listTopics.ToArray()[numberTopic].FindElement(By.TagName("a"));
+            return randomTopic;
         }
 
-        //public string GetRandomTopic2()
-        //{
-        //    var numberTopic = random.Next(0, listTopics.Count);
-        //    var selectedTopic = listTopics.ToArray()[numberTopic].FindElement(By.TagName("a"));
-        //    if (string.IsNullOrEmpty(selectedTopic.Text))
-        //    {
-        //        int i = 12;
-        //    }
-        //    return selectedTopic.Text;
-        //}
-        //public TopicPage GoToRandomTopic2(string topic)
-        //{
-        //    IWebElement s = driver.FindElement(By.XPath(
-        //        "//*[@id='container']/div/div[2]/div/div/div[1]/div/div[1]/ul/li/a/span/span[contains (text(),'" +
-        //        topic + "')]"));
-        //    IWebElement parent = s.FindElement(By.XPath(".."));
-        //    IWebElement p = parent.FindElement(By.XPath(".."));
-        //    driver.Navigate().GoToUrl(p.GetAttribute("href"));
-        //    return new TopicPage(driver);
-        //}
 
-        public TopicPage GoToRandomTopic(IWebElement topic)
+        public IWebElement GetProfileElement()
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+            IWebElement profile = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(@"//*[@id=""userbar""]/div[1]/div[1]/a[contains(@href,""profile"")]")));
+            return profile;
+        }
+
+        public TopicPage NavigateToRandomTopic(IWebElement topic)
         {  
             driver.Navigate().GoToUrl(topic.GetAttribute("href"));
             return new TopicPage(driver);
         }
 
-        public void WriteAllOpinionInCSV()
+        public void WriteAllOpinionInCsv()
         {
             var pageSource = driver.PageSource;
             var allOpinion = new List<string>();
@@ -103,22 +84,16 @@ namespace Task2
             }
         }
 
-        public void Logout()
+        public LoginPage Logout()
         {
             Actions actions = new Actions(driver);
             profileMenu = driver.FindElement(By.XPath(@"//*[@id=""userbar""]/div[1]/div[1]/a"));
-            if (profileMenu.Enabled)
-            {
-                actions.MoveToElement(profileMenu).Click().Build().Perform();
+            actions.MoveToElement(profileMenu).Click().Build().Perform();
                // profileMenu.Click();
-            }
-           // actions = new Actions(driver);
             buttonLogOut = driver.FindElement(By.XPath(@"//*[@id=""userbar""]/div[1]/div[1]/div/div[1]/div[1]/div[2]/div/a"));
-            if (buttonLogOut.Enabled)
-            {
             //    actions.MoveToElement(buttonLogOut).Click().Build().Perform();
-                buttonLogOut.Click();
-            }
+            buttonLogOut.Click();
+            return new LoginPage(driver);
         }
     }
 }

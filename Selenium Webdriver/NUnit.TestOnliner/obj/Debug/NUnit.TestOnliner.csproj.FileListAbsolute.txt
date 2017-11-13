@@ -34,3 +34,5 @@ D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Selenium We
 D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Selenium Webdriver\NUnit.TestOnliner\obj\Debug\NUnit.TestOnliner.csprojResolveAssemblyReference.cache
 D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Selenium Webdriver\NUnit.TestOnliner\obj\Debug\NUnit.TestOnliner.dll
 D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Selenium Webdriver\NUnit.TestOnliner\obj\Debug\NUnit.TestOnliner.pdb
+D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Selenium Webdriver\NUnit.TestOnliner\bin\Debug\WebDriver.Support.dll
+D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Selenium Webdriver\NUnit.TestOnliner\bin\Debug\WebDriver.Support.xml
