@@ -13,6 +13,7 @@ namespace Onliner.PageObjects
     {
         private readonly IWebDriver _driver;
         private readonly string _url;
+        private readonly string _pathToFile;
         private IWebElement _buttonSignIn;
         private IWebElement _profileMenu;
         private IWebElement _buttonLogOut;
@@ -23,10 +24,11 @@ namespace Onliner.PageObjects
         private readonly By _logoutLocator = By.XPath("//div[@id='userbar']//div/a[contains(text(),'Выйти')]");
         private Random random = new Random();
 
-        public HomePage(IWebDriver driver, string url)
+        public HomePage(IWebDriver driver, string url, string pathToFile)
         {
             _driver = driver;
             _url = url;
+            _pathToFile = pathToFile;
         }
 
         public HomePage NavigateHomePage()
@@ -37,13 +39,16 @@ namespace Onliner.PageObjects
 
         public HomePage ClickSignIn()
         {
-            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(30));
-            _buttonSignIn = wait.Until(ExpectedConditions.ElementToBeClickable(_signInLocator));
+           var fluentWait = new DefaultWait<IWebDriver>(_driver);
+            fluentWait.Timeout = TimeSpan.FromSeconds(30);
+            fluentWait.PollingInterval = TimeSpan.FromMilliseconds(2000);
+            fluentWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+            _buttonSignIn = fluentWait.Until(ExpectedConditions.ElementToBeClickable(_signInLocator));
             _buttonSignIn.Click();
             return this;
         }
 
-        public IWebElement GetRandomTopic()
+        public IWebElement GetRandomTopicFromList()
         {
             var listTopics = _driver.FindElements(_topicsLocator);
             var numberTopic = random.Next(0, listTopics.Count);
@@ -71,7 +76,7 @@ namespace Onliner.PageObjects
             {
                 opinions.Add(match.Groups[1].Value);
             }
-            using (var writerToCsv = File.CreateText(@"D:\Student\Tasks\A1QA\Onliner\Onliner.by\Onliner.by\Opinions.csv"))
+            using (var writerToCsv = File.CreateText(_pathToFile + "\\Opinions.csv"))
             {
                 foreach (var opinion in opinions)
                 {

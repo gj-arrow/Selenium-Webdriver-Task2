@@ -7,6 +7,7 @@ using Onliner.PageObjects;
 using Onliner.BrowserFactory;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting;
 
 namespace OnlinerTest
 {
@@ -14,7 +15,7 @@ namespace OnlinerTest
     public class TestOnliner
     {
         private IWebDriver _driver;
-        private CustomSettings _settings;
+        private static CustomSettings _settings;
         private HomePage _homePage;
         private LoginPage _loginPage;
         private readonly By _signInLocator = By.XPath("//div[@id='userbar']//div[contains(text(),'Вход')]");
@@ -30,11 +31,13 @@ namespace OnlinerTest
                 _settings = config.TakeSettingsFromConfig();
                 BrowserFactory.InitBrowser(_settings.Browser);
                 _driver = BrowserFactory.Driver;
-                if (_settings.Browser == "Chrome")
+                if (_settings.Browser == "chrome")
                 {
                     _driver.Manage().Window.Maximize();
                 }
                 _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
+                _homePage = new HomePage(_driver, _settings.Url, _settings.PathToFile);
+                _loginPage = new LoginPage(_driver);
             }
             catch (Exception e)
             {
@@ -51,8 +54,6 @@ namespace OnlinerTest
         [Test]
         public void AutoTestOnliner()
         {
-            _homePage = new HomePage(_driver, _settings.Url);
-            _loginPage = new LoginPage(_driver);
             _homePage.NavigateHomePage();
             Assert.AreEqual("Onliner.by", _driver.Title);
             _homePage.ClickSignIn();
@@ -70,27 +71,27 @@ namespace OnlinerTest
 
         private static void Authorization(LoginPage logPage)
         {
-            logPage.EnterUsername("gj-arrow");
-            logPage.EnterPassword("123456789Qwerty");
+            logPage.EnterUsername(_settings.Username);
+            logPage.EnterPassword(_settings.Password);
             logPage.SubmitLogin();
         }
 
         private Dictionary<string,string> CheckRandomTopic()
         {
             var displayed = false;
-            var result = new Dictionary<string,string>();
+            var resultRandomTopic = new Dictionary<string,string>();
             while (!displayed)
             {
-                var topic = _homePage.GetRandomTopic();
-                if (topic.Displayed)
+                var topicElement = _homePage.GetRandomTopicFromList();
+                if (topicElement.Displayed)
                 {
                     displayed = true;
-                    result.Add("expectedTopic",topic.Text);
-                    var top = _homePage.NavigateToRandomTopic(topic);
-                    result.Add("actualTopic",top.GetNameOfTopic());
+                    resultRandomTopic.Add("expectedTopic", topicElement.Text);
+                    var topicPage = _homePage.NavigateToRandomTopic(topicElement);
+                    resultRandomTopic.Add("actualTopic",topicPage.GetNameOfTopic());
                 }
             }
-            return result;
+            return resultRandomTopic;
         }
     }
 }

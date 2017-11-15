@@ -38,9 +38,9 @@ namespace Onliner.PageObjects
 
         public void SubmitLogin()
         {
-            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(30));
+             var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(30));
             _buttonSubmit = wait.Until(ExpectedConditions.ElementToBeClickable(_submitLocator));
-            Thread.Sleep(2000);
+            //Thread.Sleep(2000);
             var actions = new Actions(_driver);
             actions.MoveToElement(_buttonSubmit).Click().Build().Perform();
         }

@@ -16,3 +16,22 @@ D:\Student\Tasks\A1QA\Onliner\Onliner.by\Onliner.by\bin\Debug\WebDriver.xml
 D:\Student\Tasks\A1QA\Onliner\Onliner.by\Onliner.by\bin\Debug\WebDriver.Support.xml
 D:\Student\Tasks\A1QA\Onliner\Onliner.by\Onliner.by\obj\Debug\Onliner.by.dll
 D:\Student\Tasks\A1QA\Onliner\Onliner.by\Onliner.by\obj\Debug\Onliner.by.pdb
+D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Onliner\Onliner.by\Onliner.by\bin\Debug\NUnit3.TestAdapter.dll
+D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Onliner\Onliner.by\Onliner.by\bin\Debug\nunit.engine.dll
+D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Onliner\Onliner.by\Onliner.by\bin\Debug\nunit.engine.api.dll
+D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Onliner\Onliner.by\Onliner.by\bin\Debug\Mono.Cecil.dll
+D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Onliner\Onliner.by\Onliner.by\bin\Debug\Mono.Cecil.Pdb.dll
+D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Onliner\Onliner.by\Onliner.by\bin\Debug\Mono.Cecil.Mdb.dll
+D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Onliner\Onliner.by\Onliner.by\bin\Debug\Mono.Cecil.Rocks.dll
+D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Onliner\Onliner.by\Onliner.by\bin\Debug\Onliner.by.dll.config
+D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Onliner\Onliner.by\Onliner.by\bin\Debug\Onliner.by.dll
+D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Onliner\Onliner.by\Onliner.by\bin\Debug\Onliner.by.pdb
+D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Onliner\Onliner.by\Onliner.by\bin\Debug\nunit.framework.dll
+D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Onliner\Onliner.by\Onliner.by\bin\Debug\WebDriver.dll
+D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Onliner\Onliner.by\Onliner.by\bin\Debug\WebDriver.Support.dll
+D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Onliner\Onliner.by\Onliner.by\bin\Debug\nunit.framework.xml
+D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Onliner\Onliner.by\Onliner.by\bin\Debug\WebDriver.xml
+D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Onliner\Onliner.by\Onliner.by\bin\Debug\WebDriver.Support.xml
+D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Onliner\Onliner.by\Onliner.by\obj\Debug\Onliner.by.dll
+D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Onliner\Onliner.by\Onliner.by\obj\Debug\Onliner.by.pdb
+D:\Student\Tasks\A1QA\new folder\2 task git\Selenium-Webdriver-Task2\Onliner\Onliner.by\Onliner.by\obj\Debug\Onliner.by.csprojResolveAssemblyReference.cache

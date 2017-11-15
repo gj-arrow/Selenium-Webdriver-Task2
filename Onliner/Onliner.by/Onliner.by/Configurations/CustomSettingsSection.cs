@@ -20,21 +20,38 @@ namespace Onliner.Configurations
             set { this["Url"] = value; }
         }
 
-        //[ConfigurationProperty("PathToFile")]
-        //public CustomSettingsElement PathToFile
-        //{
-        //    get { return this["PathToFile"] as CustomSettingsElement; }
-        //    set { this["PathToFile"] = value; }
-        //}
+        [ConfigurationProperty("PathToFile")]
+        public CustomSettingsElement PathToFile
+        {
+            get { return this["PathToFile"] as CustomSettingsElement; }
+            set { this["PathToFile"] = value; }
+        }
+
+        [ConfigurationProperty("Username")]
+        public CustomSettingsElement Username
+        {
+            get { return this["Username"] as CustomSettingsElement; }
+            set { this["Username"] = value; }
+        }
+
+        [ConfigurationProperty("Password")]
+        public CustomSettingsElement Password
+        {
+            get { return this["Password"] as CustomSettingsElement; }
+            set { this["Password"] = value; }
+        }
+
 
 
         public CustomSettings TakeSettingsFromConfig()
         {
             return new CustomSettings()
             {
-                Browser = this.Browser.InnerText,
+                Browser = this.Browser.InnerText.ToLower(),
                 Url = this.Url.InnerText,
-               // PathToFile = this.PathToFile.InnerText
+                PathToFile = this.PathToFile.InnerText,
+                Password = this.Password.InnerText,
+                Username = this.Username.InnerText
             };
         }
     }

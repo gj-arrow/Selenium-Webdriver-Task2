@@ -29,17 +29,17 @@ namespace Onliner.BrowserFactory
         {
             switch (browserName)
             {
-                case "Firefox":
+                case "firefox":
                     {
                         _driver = new FirefoxDriver();
-                    Drivers.Add("Firefox", Driver);
+                    Drivers.Add("firefox", Driver);
                     }
                     break;
 
-                case "Chrome":
+                case "chrome":
                     {
                         _driver = new ChromeDriver();
-                        Drivers.Add("Chrome", Driver);
+                        Drivers.Add("chrome", Driver);
                     }
                     break;
             }
