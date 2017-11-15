@@ -1,13 +1,9 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using OpenQA.Selenium;
-using System;
-using System.Configuration;
 using Onliner.Configurations;
 using Onliner.PageObjects;
 using Onliner.BrowserFactory;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting;
 
 namespace OnlinerTest
 {
@@ -15,34 +11,27 @@ namespace OnlinerTest
     public class TestOnliner
     {
         private IWebDriver _driver;
-        private static CustomSettings _settings;
+        private string _actualTopicName;
+        private string _expectedTopicName;
         private HomePage _homePage;
         private LoginPage _loginPage;
         private readonly By _signInLocator = By.XPath("//div[@id='userbar']//div[contains(text(),'Вход')]");
         private readonly By _profileLocator = By.XPath("//div[@id='userbar']//div/a[contains(@href,'profile')]");
-        private const string SectionAppConfig = "Settings";
+        private readonly By _mainPageLocator =
+            By.XPath("//div[@class='b-main-page-grid-4 b-main-page-news-2']/header[@class='b-main-page-blocks-header-2 cfix']");
 
         [SetUp]
         public void Initialize()
         {
-            try
+            BrowserFactory.InitBrowser(SettingsSection.Settings.Browser);
+            _driver = BrowserFactory.Driver;
+            if (SettingsSection.Settings.Browser == "chrome")
             {
-                var config = (CustomSettingsSection) ConfigurationManager.GetSection(SectionAppConfig);
-                _settings = config.TakeSettingsFromConfig();
-                BrowserFactory.InitBrowser(_settings.Browser);
-                _driver = BrowserFactory.Driver;
-                if (_settings.Browser == "chrome")
-                {
-                    _driver.Manage().Window.Maximize();
-                }
-                _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
-                _homePage = new HomePage(_driver, _settings.Url, _settings.PathToFile);
-                _loginPage = new LoginPage(_driver);
+                _driver.Manage().Window.Maximize();
             }
-            catch (Exception e)
-            {
-                Assert.Fail(e.Message);
-            }
+            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(SettingsSection.Settings.ImplicitWait);
+            _homePage = new HomePage(_driver);
+            _loginPage = new LoginPage(_driver);
         }
 
         [TearDown]
@@ -55,15 +44,16 @@ namespace OnlinerTest
         public void AutoTestOnliner()
         {
             _homePage.NavigateHomePage();
-            Assert.AreEqual("Onliner.by", _driver.Title);
+            var numberSectionTopics = _homePage.FindNumberOfElements(_mainPageLocator);
+            Assert.IsTrue(numberSectionTopics == 6);
             _homePage.ClickSignIn();
             Authorization(_loginPage);
             var profileElements = _homePage.FindNumberOfElements(_profileLocator);
             Assert.IsFalse(profileElements == 0);
-            var resultRandomTopic = CheckRandomTopic();
-            Assert.AreEqual(resultRandomTopic["expectedTopic"],resultRandomTopic["actualTopic"]);
+            CheckRandomTopic();
+            Assert.AreEqual(_expectedTopicName, _actualTopicName);
             _homePage.NavigateHomePage();
-            _homePage.WriteAllOpinionInCsv();
+            _homePage.WriteOpinionsInCsv();
             _homePage.Logout();
             var signIneElements = _homePage.FindNumberOfElements(_signInLocator);
             Assert.IsTrue(signIneElements == 1);
@@ -71,27 +61,25 @@ namespace OnlinerTest
 
         private static void Authorization(LoginPage logPage)
         {
-            logPage.EnterUsername(_settings.Username);
-            logPage.EnterPassword(_settings.Password);
+            logPage.EnterUsername(SettingsSection.Settings.Username);
+            logPage.EnterPassword(SettingsSection.Settings.Password);
             logPage.SubmitLogin();
         }
 
-        private Dictionary<string,string> CheckRandomTopic()
+        private void CheckRandomTopic()
         {
             var displayed = false;
-            var resultRandomTopic = new Dictionary<string,string>();
             while (!displayed)
             {
                 var topicElement = _homePage.GetRandomTopicFromList();
                 if (topicElement.Displayed)
                 {
                     displayed = true;
-                    resultRandomTopic.Add("expectedTopic", topicElement.Text);
+                    _expectedTopicName = topicElement.Text;
                     var topicPage = _homePage.NavigateToRandomTopic(topicElement);
-                    resultRandomTopic.Add("actualTopic",topicPage.GetNameOfTopic());
+                    _actualTopicName = topicPage.GetNameOfTopic();
                 }
             }
-            return resultRandomTopic;
         }
     }
 }

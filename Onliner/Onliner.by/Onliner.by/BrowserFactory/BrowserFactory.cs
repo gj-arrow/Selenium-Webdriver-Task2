@@ -32,11 +32,11 @@ namespace Onliner.BrowserFactory
                 case "firefox":
                     {
                         _driver = new FirefoxDriver();
-                    Drivers.Add("firefox", Driver);
+                        Drivers.Add("firefox", Driver);
                     }
                     break;
 
-                case "chrome":
+                default:
                     {
                         _driver = new ChromeDriver();
                         Drivers.Add("chrome", Driver);

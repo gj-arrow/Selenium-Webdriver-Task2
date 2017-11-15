@@ -58,9 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BrowserFactory\BrowserFactory.cs" />
-    <Compile Include="Configurations\CustomSettings.cs" />
-    <Compile Include="Configurations\CustomSettingsElement.cs" />
-    <Compile Include="Configurations\CustomSettingsSection.cs" />
+    <Compile Include="Configurations\SettingsSection.cs" />
     <Compile Include="TestOnliner.cs" />
     <Compile Include="PageObjects\HomePage.cs" />
     <Compile Include="PageObjects\LoginPage .cs" />
@@ -73,6 +71,9 @@
   <ItemGroup>
     <None Include="Configurations\App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CsvFiles\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Selenium.Chrome.WebDriver.2.33\build\Selenium.Chrome.WebDriver.targets" Condition="Exists('..\packages\Selenium.Chrome.WebDriver.2.33\build\Selenium.Chrome.WebDriver.targets')" />

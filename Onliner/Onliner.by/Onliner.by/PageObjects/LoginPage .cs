@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Runtime.InteropServices;
-using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
@@ -38,9 +36,8 @@ namespace Onliner.PageObjects
 
         public void SubmitLogin()
         {
-             var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(30));
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(45));
             _buttonSubmit = wait.Until(ExpectedConditions.ElementToBeClickable(_submitLocator));
-            //Thread.Sleep(2000);
             var actions = new Actions(_driver);
             actions.MoveToElement(_buttonSubmit).Click().Build().Perform();
         }

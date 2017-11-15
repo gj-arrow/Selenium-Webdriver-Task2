@@ -1,11 +1,11 @@
-﻿using System;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 
 namespace Onliner.PageObjects
 {
     public class TopicPage
     {
         private readonly IWebDriver _driver;
+        private readonly By _textTopicLocator = By.CssSelector("div[class='schema-header']> h1[class='schema-header__title']");
 
         public TopicPage(IWebDriver driver)
         {
@@ -14,7 +14,7 @@ namespace Onliner.PageObjects
 
         public string GetNameOfTopic()
         {
-            return _driver.FindElement(By.CssSelector("div[class='schema-header']> h1[class='schema-header__title']")).Text;
+            return _driver.FindElement(_textTopicLocator).Text;
         }
     }
 }
