@@ -15,17 +15,13 @@ namespace OnlinerTest
         private string _expectedTopicName;
         private HomePage _homePage;
         private LoginPage _loginPage;
-        private readonly By _signInLocator = By.XPath("//div[@id='userbar']//div[contains(text(),'Вход')]");
-        private readonly By _profileLocator = By.XPath("//div[@id='userbar']//div/a[contains(@href,'profile')]");
-        private readonly By _mainPageLocator =
-            By.XPath("//div[@class='b-main-page-grid-4 b-main-page-news-2']/header[@class='b-main-page-blocks-header-2 cfix']");
 
         [SetUp]
         public void Initialize()
         {
-            BrowserFactory.InitBrowser(SettingsSection.Settings.Browser);
+            BrowserFactory.InitBrowser(SettingsSection.Settings.Browser.ToUpper());
             _driver = BrowserFactory.Driver;
-            if (SettingsSection.Settings.Browser == "chrome")
+            if (SettingsSection.Settings.Browser.ToUpper() == "CHROME")
             {
                 _driver.Manage().Window.Maximize();
             }
@@ -44,19 +40,19 @@ namespace OnlinerTest
         public void AutoTestOnliner()
         {
             _homePage.NavigateHomePage();
-            var numberSectionTopics = _homePage.FindNumberOfElements(_mainPageLocator);
-            Assert.IsTrue(numberSectionTopics == 6);
+            var numberSectionsTopic = _homePage.NumberVerifiableEntity("CurrentIsMainPage");
+            Assert.IsTrue(numberSectionsTopic == 6, "The main page should be divided into 6 sections according to the topics.");
             _homePage.ClickSignIn();
             Authorization(_loginPage);
-            var profileElements = _homePage.FindNumberOfElements(_profileLocator);
-            Assert.IsFalse(profileElements == 0);
+            var userName = _homePage.GetUserName();
+            Assert.AreEqual(SettingsSection.Settings.Username, userName, "User names must match");
             CheckRandomTopic();
-            Assert.AreEqual(_expectedTopicName, _actualTopicName);
+            Assert.AreEqual(_expectedTopicName, _actualTopicName, "Topic names must match");
             _homePage.NavigateHomePage();
-            _homePage.WriteOpinionsInCsv();
+            _homePage.WriteOpinions();
             _homePage.Logout();
-            var signIneElements = _homePage.FindNumberOfElements(_signInLocator);
-            Assert.IsTrue(signIneElements == 1);
+            var signIneElements = _homePage.NumberVerifiableEntity("LogoutUser");
+            Assert.IsTrue(signIneElements == 1, "User has not been logged out.Button 'Вход' must be on page");
         }
 
         private static void Authorization(LoginPage logPage)

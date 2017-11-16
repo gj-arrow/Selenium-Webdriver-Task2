@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using Onliner.Configurations;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
+using Onliner.Helpers;
 
 namespace Onliner.BrowserFactory
 {
   public class BrowserFactory
     {
-        private static readonly IDictionary<string, IWebDriver> Drivers = new Dictionary<string, IWebDriver>();
         private static IWebDriver _driver;
 
         public static IWebDriver Driver
@@ -19,30 +20,35 @@ namespace Onliner.BrowserFactory
                     throw new NullReferenceException("The WebDriver browser instance was not initialized. You should first call the method InitBrowser.");
                 return _driver;
             }
-            private set
-            {
-                _driver = value;
-            }
         }
 
         public static void InitBrowser(string browserName)
         {
-            switch (browserName)
+            var currentBrowser = GetCurrentBrowser();
+            switch (currentBrowser)
             {
-                case "firefox":
+                case BrowserNameHelper.BrowserEnum.FIREFOX:
                     {
                         _driver = new FirefoxDriver();
-                        Drivers.Add("firefox", Driver);
+                    }
+                    break;
+
+                case BrowserNameHelper.BrowserEnum.CHROME:
+                    {
+                        _driver = new ChromeDriver();
                     }
                     break;
 
                 default:
-                    {
-                        _driver = new ChromeDriver();
-                        Drivers.Add("chrome", Driver);
-                    }
-                    break;
+                {
+                    throw new Exception("Invalid browser name.");
+                }
             }
+        }
+
+        private static BrowserNameHelper.BrowserEnum GetCurrentBrowser()
+        {
+            return (BrowserNameHelper.BrowserEnum)Enum.Parse(typeof(BrowserNameHelper.BrowserEnum),SettingsSection.Settings.Browser.ToUpper());
         }
 
         public static void NavigateToUrl(string url)
@@ -52,11 +58,8 @@ namespace Onliner.BrowserFactory
 
         public static void CloseDrivers()
         {
-            foreach (var key in Drivers.Keys)
-            {
-                Drivers[key].Close();
-                Drivers[key].Quit();
-            }
+            _driver.Close();
+            _driver.Quit();
         }
     }
 }

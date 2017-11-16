@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Onliner.Configurations;
+using Onliner.Services;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.UI;
+
 
 namespace Onliner.PageObjects
 {
     public class LoginPage
     {
-        private readonly By _passwordLocator = By.CssSelector("div[class='auth-box__line']>input[type='password']");
-        private readonly By _usernameLocator = By.CssSelector("div[class='auth-box__line']>input[type='text']");
+        private readonly By _passwordLocator = By.CssSelector("div[class*='auth-box__line']>input[type='password']");
+        private readonly By _usernameLocator = By.CssSelector("div[class*='auth-box__line']>input[type='text']");
         private readonly By _submitLocator = By.ClassName("auth-box__auth-submit");
         private readonly IWebDriver _driver;
         private IWebElement _inputUserName;
@@ -36,10 +37,13 @@ namespace Onliner.PageObjects
 
         public void SubmitLogin()
         {
-            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(45));
-            _buttonSubmit = wait.Until(ExpectedConditions.ElementToBeClickable(_submitLocator));
-            var actions = new Actions(_driver);
-            actions.MoveToElement(_buttonSubmit).Click().Build().Perform();
-        }
+            var displayed = WaitService.WaitTillElementisDisplayed(_driver, _submitLocator, SettingsSection.Settings.ExplicitWait);
+            if (displayed)
+            {
+                var actions = new Actions(_driver);
+                _buttonSubmit = _driver.FindElement(_submitLocator);
+                actions.MoveToElement(_buttonSubmit).Click().Build().Perform();
+            }
+        } 
     }
 }

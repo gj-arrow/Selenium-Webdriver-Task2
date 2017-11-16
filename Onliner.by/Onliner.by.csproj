@@ -59,6 +59,9 @@
   <ItemGroup>
     <Compile Include="BrowserFactory\BrowserFactory.cs" />
     <Compile Include="Configurations\SettingsSection.cs" />
+    <Compile Include="Helpers\BrowserNameHelper.cs" />
+    <Compile Include="Services\WaitService.cs" />
+    <Compile Include="Services\FileService.cs" />
     <Compile Include="TestOnliner.cs" />
     <Compile Include="PageObjects\HomePage.cs" />
     <Compile Include="PageObjects\LoginPage .cs" />
@@ -72,9 +75,7 @@
     <None Include="Configurations\App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CsvFiles\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Selenium.Chrome.WebDriver.2.33\build\Selenium.Chrome.WebDriver.targets" Condition="Exists('..\packages\Selenium.Chrome.WebDriver.2.33\build\Selenium.Chrome.WebDriver.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -57,5 +57,12 @@ namespace Onliner.Configurations
             get { return (int)this["ImplicitWait"]; }
             set { this["ImplicitWait"] = value; }
         }
+
+        [ConfigurationProperty("ExplicitWait")]
+        public int ExplicitWait
+        {
+            get { return (int)this["ExplicitWait"]; }
+            set { this["ExplicitWait"] = value; }
+        }
     } 
 }
