@@ -58,7 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BrowserFactory\BrowserFactory.cs" />
-    <Compile Include="Configurations\SettingsSection.cs" />
+    <Compile Include="Configurations\Config.cs" />
     <Compile Include="Helpers\BrowserNameHelper.cs" />
     <Compile Include="Services\WaitService.cs" />
     <Compile Include="Services\FileService.cs" />

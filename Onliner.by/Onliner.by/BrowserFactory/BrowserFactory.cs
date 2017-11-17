@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Onliner.Configurations;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -48,15 +47,10 @@ namespace Onliner.BrowserFactory
 
         private static BrowserNameHelper.BrowserEnum GetCurrentBrowser()
         {
-            return (BrowserNameHelper.BrowserEnum)Enum.Parse(typeof(BrowserNameHelper.BrowserEnum),SettingsSection.Settings.Browser.ToUpper());
+            return (BrowserNameHelper.BrowserEnum)Enum.Parse(typeof(BrowserNameHelper.BrowserEnum),Config.Browser.ToUpper());
         }
 
-        public static void NavigateToUrl(string url)
-        {
-            Driver.Url = url;
-        }
-
-        public static void CloseDrivers()
+        public static void CloseDriver()
         {
             _driver.Close();
             _driver.Quit();

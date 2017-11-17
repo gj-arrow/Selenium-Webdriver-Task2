@@ -37,7 +37,7 @@ namespace Onliner.PageObjects
 
         public void SubmitLogin()
         {
-            var displayed = WaitService.WaitTillElementisDisplayed(_driver, _submitLocator, SettingsSection.Settings.ExplicitWait);
+            var displayed = WaitService.WaitTillElementisDisplayed(_driver, _submitLocator, Config.ExplicitWait);
             if (displayed)
             {
                 var actions = new Actions(_driver);

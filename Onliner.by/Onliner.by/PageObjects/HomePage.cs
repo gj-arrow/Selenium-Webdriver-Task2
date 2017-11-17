@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Onliner.Configurations;
@@ -35,13 +34,13 @@ namespace Onliner.PageObjects
 
         public HomePage NavigateHomePage()
         {
-            _driver.Navigate().GoToUrl(SettingsSection.Settings.Url);
+            _driver.Navigate().GoToUrl(Config.Url);
             return this;
         }
 
         public HomePage ClickSignIn()
         {
-            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(SettingsSection.Settings.ExplicitWait));
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(Config.ExplicitWait));
             _buttonSignIn = wait.Until(ExpectedConditions.ElementToBeClickable(_signInLocator));
             _buttonSignIn.Click();
             return this;
@@ -64,7 +63,7 @@ namespace Onliner.PageObjects
         public string GetUserName()
         {
             var actions = new Actions(_driver);
-            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(SettingsSection.Settings.ExplicitWait));
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(Config.ExplicitWait));
             _profileMenu = wait.Until(ExpectedConditions.ElementToBeClickable(_profileMenuLocator));
             actions.MoveToElement(_profileMenu).Click().Build().Perform();
             var username = wait.Until(ExpectedConditions.ElementIsVisible(_userNameLocator)).Text;
@@ -106,8 +105,8 @@ namespace Onliner.PageObjects
             {
                 opinions.Add(match.Groups[1].Value);
             }
-            var pathToFile = Environment.CurrentDirectory + SettingsSection.Settings.PathToFile + "\\";
-            FileService.WriteFileCsv(opinions, pathToFile, SettingsSection.Settings.NameFile);
+            var pathToFile = Environment.CurrentDirectory + Config.PathToFile + "\\";
+            FileService.WriteFileCsv(opinions, pathToFile, Config.NameFile);
         }
 
         public LoginPage Logout()

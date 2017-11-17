@@ -19,13 +19,13 @@ namespace OnlinerTest
         [SetUp]
         public void Initialize()
         {
-            BrowserFactory.InitBrowser(SettingsSection.Settings.Browser.ToUpper());
+            BrowserFactory.InitBrowser(Config.Browser.ToUpper());
             _driver = BrowserFactory.Driver;
-            if (SettingsSection.Settings.Browser.ToUpper() == "CHROME")
+            if (Config.Browser.ToUpper() == "CHROME")
             {
                 _driver.Manage().Window.Maximize();
             }
-            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(SettingsSection.Settings.ImplicitWait);
+            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(Config.ImplicitWait);
             _homePage = new HomePage(_driver);
             _loginPage = new LoginPage(_driver);
         }
@@ -33,7 +33,7 @@ namespace OnlinerTest
         [TearDown]
         public void Dispose()
         {
-            BrowserFactory.CloseDrivers();
+            BrowserFactory.CloseDriver();
         }
 
         [Test]
@@ -45,7 +45,7 @@ namespace OnlinerTest
             _homePage.ClickSignIn();
             Authorization(_loginPage);
             var userName = _homePage.GetUserName();
-            Assert.AreEqual(SettingsSection.Settings.Username, userName, "User names must match");
+            Assert.AreEqual(Config.Username, userName, "User names must match");
             CheckRandomTopic();
             Assert.AreEqual(_expectedTopicName, _actualTopicName, "Topic names must match");
             _homePage.NavigateHomePage();
@@ -57,8 +57,8 @@ namespace OnlinerTest
 
         private static void Authorization(LoginPage logPage)
         {
-            logPage.EnterUsername(SettingsSection.Settings.Username);
-            logPage.EnterPassword(SettingsSection.Settings.Password);
+            logPage.EnterUsername(Config.Username);
+            logPage.EnterPassword(Config.Password);
             logPage.SubmitLogin();
         }
 
